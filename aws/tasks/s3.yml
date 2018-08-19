@@ -1,0 +1,18 @@
+- name: Create S3 bucket
+  s3_bucket:
+    name: "{{ bucket_name }}"
+    region: "{{ aws_region }}"
+    aws_access_key:   "{{ aws_access_key }}"
+    aws_secret_key:   "{{ aws_secret_key }}" 
+  register: my_s3
+
+# - name: Create S3 Role
+#   iam_role:
+#     name: "{{ s3role_name }}"
+#     region: "{{ aws_region }}"
+#     aws_access_key:   "{{ aws_access_key }}"
+#     aws_secret_key:   "{{ aws_secret_key }}"
+#     assume_role_policy_document: "{{ lookup('file','policy.json') }}"
+#     managed_policy:
+#       - arn:aws:iam::aws:policy/AmazonS3FullAccess
+#   register: my_s3role

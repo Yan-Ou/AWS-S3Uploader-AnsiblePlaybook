@@ -1,0 +1,94 @@
+---
+#  - name: Ensure repository is update
+#    yum:
+#     update_cache: yes
+ 
+#  - name: Upgrade the server
+#    yum:
+#     upgrade: safe
+
+ - name: Upgrade all yum packages
+   yum: 
+    name: "*"
+    state: latest
+
+ - name: Install golang package
+   yum:
+    name: golang 
+    state: present
+ 
+#  - name: Install Nginx
+#    yum:
+#     name: nginx
+#     state: present
+
+ - name: Install Nginx
+   command: amazon-linux-extras install nginx1.12
+
+ - name: Start Nginx 
+   systemd:
+     name: nginx
+     state: started
+     enabled: yes 
+
+ - name: Install git
+   yum:
+     name: git
+     state: present
+ 
+ - name: Create web app folder
+   file:
+     path: /home/ec2-user/app
+     state: directory
+     mode: 0755
+
+ - name: Copy source code file
+   copy:
+    src: src/main.go
+    dest: /home/ec2-user/app
+
+ - name: Copy web template
+   copy:
+    src: src/view.html
+    dest: /home/ec2-user/app
+
+ - name: Set GOPATH
+   lineinfile:
+     dest: /etc/environment
+     state: present
+     regexp: '^GOPATH'
+     line: 'GOPATH=/home/ec2-user'
+
+ - name: Install app dependencies
+   command: go get -u github.com/aws/aws-sdk-go/aws
+
+#  - name: Backup the default nginx.conf
+#    command: mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
+
+ - name: Copy nginx configuration
+   copy:
+    src: src/nginx.conf
+    dest: /etc/nginx/nginx.conf
+
+#  - name: Copy start up script
+#    copy: 
+#     src: startapp.sh
+#     dest: /home/ec2-user/app
+
+ - name: Stop nginx service
+   command: systemctl stop nginx
+ 
+ - name: Change app folder ownership
+   command: chown -R ec2-user:ec2-user /home/ec2-user/app
+ 
+ - name: Start app
+   shell: nohup go run main.go </dev/null>/dev/null 2>&1 &
+   args:
+    chdir: /home/ec2-user/app/
+
+ - name: Start Nginx server
+   command: systemctl start nginx
+
+
+
+

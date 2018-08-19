@@ -1,0 +1,34 @@
+---
+ - hosts: local
+   connection: local
+   gather_facts: no
+   vars_files:
+    - aws/vars/s3.yml
+    - aws/vars/vpc.yml
+    - aws/vars/ec2_key.yml
+    - aws/vars/webserver.yml
+   vars_prompt:
+    - name: "aws_access_key"
+      prompt: "Enter your access key "
+      private: yes
+    - name : "aws_secret_key"
+      prompt: "Enter your secret key "
+      private: yes
+    - name: "aws_region"
+      prompt: "Enter the region name "
+      default: "ap-southeast-2"
+      private: no
+   tasks:
+     - include: aws/tasks/s3.yml
+     - include: aws/tasks/vpc.yml
+     - include: aws/tasks/ec2_key.yml
+     - include: aws/tasks/webserver.yml
+
+ - hosts: webserver
+   sudo: True
+   user: ec2-user
+   gather_facts: True
+   roles:
+     - app
+
+    

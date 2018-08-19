@@ -1,0 +1,17 @@
+<html>
+  <head>
+         <title>Test Upload a File</title>
+  </head>
+  <body>
+<form enctype="multipart/form-data" action="upload" method="post">
+          {{/* 1. File input */}}
+          <div>AWS Access Key <input type="text" name="accessKey"></div>
+          <div>AWS Secret Key <input type="text" name="secretKey"></div>
+          <input type="file" name="uploadfile" />
+
+          {{/* 2. Submit button */}}
+          <input type="submit" value="upload file" />
+      </form>
+
+  </body>
+  </html>
