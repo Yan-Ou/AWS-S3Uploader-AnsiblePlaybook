@@ -17,12 +17,12 @@
   - Copy web app source files (main.go, view.html) to EC2 instance
   - Startup the web app
   
-  # How to run the playbook
-  1. Issue the following command:
+ # How to run the playbook
+ 1. Issue the following command:
     ansible-playbook site.yml -i hosts
-  2. After issuing the command, input your AWSAccessKey, AWSSecretKey and region name which you want to deploy to. Default region name is ap-southeast2 #Sydney.
+ 2. After issuing the command, input your AWSAccessKey, AWSSecretKey and region name which you want to deploy to. Default region name is ap-southeast2 #Sydney.
   
-  # File structure:
+ # File structure:
   - site.yml: contains all the tasks
   - hosts: contains all inventories
   - ansible.cfg: ansible configuration 
@@ -32,9 +32,9 @@
   - app: ansible role to deploy web app
   - aws: aws tasks to provision VPC, Keypair,EC2 and S3
   
-  # Web app:
-  1. Implemented by Go along with AWS SDK.
-  2. Call AWS REST APIs to upload files to S3 bucket.
-  3. Fire up web service and listen to port 8001(root path handler), 8002(upload path handler).
-  4. Nginx wraps two path and bind them to port 80 for public access. 
+ # Web app:
+ 1. Implemented by Go along with AWS SDK.
+ 2. Call AWS REST APIs to upload files to S3 bucket.
+ 3. Fire up web service and listen to port 8001(root path handler), 8002(upload path handler).
+ 4. Nginx wraps two path and bind them to port 80 for public access. 
   
