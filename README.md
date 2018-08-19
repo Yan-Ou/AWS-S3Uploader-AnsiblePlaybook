@@ -10,7 +10,7 @@
 - Create 1 x S3 bucket
 - Create 1 x Key pair
 - Provision 1 x EC2 instance 
-- app role
+- App role
   - Install Go packages
   - Install Nginx
   - Install Git
