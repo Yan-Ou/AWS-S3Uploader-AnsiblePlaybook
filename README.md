@@ -14,7 +14,7 @@
   - Install Go packages
   - Install Nginx
   - Install Git
-  - Copy the web app (main.go, view.html) to EC2 instance
+  - Copy web app source files (main.go, view.html) to EC2 instance
   - Startup the web app
   
   # How to run the playbook
