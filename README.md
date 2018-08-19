@@ -2,7 +2,8 @@
 1. Python 2.7.x is installed.
 2. Ansible 2.6.x is installed.
 3. bot0, botocore and boto3 are installed. 
-4. AWS account with necessary permissions, and get AWSAccessKey and AWSSecretKey ready for running the playbook.
+4. AWS account with necessary permissions. 
+5. AWSAccessKey and AWSSecretKey ready for running the playbook.
 
 # Playbook tasks:
 - Create 1 x VPC (1 x public subnet, 1 x Internet gateway, and 1 public route table)
